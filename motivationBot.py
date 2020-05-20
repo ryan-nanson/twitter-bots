@@ -12,7 +12,7 @@ logger = logging.getLogger()
 def tweet_motivation(api, day):
     logger.info("Tweeting motivation")
     
-    happy_day = f"Happy {day}! "
+    happy_day = f"Happy {day}! \n \n"
     message = get_motivational_quote(api)
     
     tweet_message = f"{happy_day}{message}"
@@ -26,10 +26,11 @@ def tweet_motivation(api, day):
 def get_gif(api):
     media_list = list()
     response = api.media_upload('thankyou.gif')
-    return media_list.append(response.media_id_string)
+    media_list.append(response.media_id_string)
+    return media_list
 
 def get_motivational_quote(api):
-    return "Day 3 of #100DaysOfCode Thank you for helping me reach 100 followers - this tweet was written by my python bot"
+    return "Day 3 of #100DaysOfCode\nThank you for helping me reach 100 followers - this tweet was written and sent by my python bot"
     
 def get_day():    
     todays_date = date.today()
