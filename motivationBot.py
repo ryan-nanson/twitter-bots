@@ -12,8 +12,18 @@ logger = logging.getLogger()
 def tweet_motivation(api, day):
     logger.info("Tweeting motivation")
     
-    logger.info(f"Happy {day}")
-    #api.update_status(f"Happy {day}")
+    happy_day = f"Happy {day}!"
+    hashtag = "\n #test"
+    
+    tweet_message = f"{happy_day}{hashtag}"
+    logger.info(f"{tweet_message}")
+    
+    media_list = list()
+    response = api.media_upload('thankyou.gif')
+    media_list.append(response.media_id_string)
+    
+    logger.info("Sending tweet")
+    api.update_status(status=tweet_message, media_ids=media_list)
     
 def get_day():    
     todays_date = date.today()
