@@ -37,7 +37,6 @@ class FavRetweetListener(tweepy.StreamListener):
                 # Retweet, since we have not retweeted it yet
                 try:
                     should_retweet = randint(0, 10)
-                    logger.info(should_retweet)
                     if should_retweet < 4:
                         logger.info("Retwweting...")
                         tweet.retweet()
@@ -46,7 +45,6 @@ class FavRetweetListener(tweepy.StreamListener):
             if not tweet.user.following:
                 # Retweet, since we have not retweeted it yet
                 try:
-                    logger.info(should_retweet)
                     if should_retweet < 1:
                         logger.info("Following...")
                         self.api.create_friendship(tweet.user.id)
