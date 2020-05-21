@@ -4,7 +4,7 @@ import tweepy
 import logging
 from config import create_api
 from random import seed
-from random import random
+from random import randint
 import time
 
 seed(1)
@@ -14,7 +14,7 @@ logger = logging.getLogger()
 class FavRetweetListener(tweepy.StreamListener):
     def __init__(self, api):
         self.start_time = time.time()
-        self.limit = 180
+        self.limit = 30
         self.api = api
         self.me = api.me()
 
@@ -22,7 +22,7 @@ class FavRetweetListener(tweepy.StreamListener):
         stream_time = time.time() - self.start_time
         if stream_time < self.limit:
             logger.info(f"Processing tweet id {tweet.id}")
-            time.sleep(random() * 10)
+            time.sleep(randint(0, 2))
             if tweet.in_reply_to_status_id is not None or \
                 tweet.user.id == self.me.id:
                 # This tweet is a reply or I'm its author so, ignore it
@@ -36,12 +36,22 @@ class FavRetweetListener(tweepy.StreamListener):
             if not tweet.retweeted:
                 # Retweet, since we have not retweeted it yet
                 try:
-                    should_retweet = random()
+                    should_retweet = randint(0, 10)
                     logger.info(should_retweet)
-                    if should_retweet < 3:
-                        tweet.retweet
+                    if should_retweet < 5:
+                        logger.info("Retwweting...")
+                        tweet.retweet()
                 except Exception as e:
-                    logger.error("Error on fav and retweet", exc_info=True)
+                    logger.error("Error retweet", exc_info=True)
+            if not tweet.user.following:
+                # Retweet, since we have not retweeted it yet
+                try:
+                    logger.info(should_retweet)
+                    if should_retweet < 9:
+                        logger.info("Following...")
+                        self.api.create_friendship(tweet.user.id)
+                except Exception as e:
+                    logger.error("Error on follow", exc_info=True)
         else:
             logger.info(f"Closing stream, you have been streaming for: {stream_time}")
             return False
