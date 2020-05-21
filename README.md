@@ -1,25 +1,5 @@
-# twitter-bots
+# Twitter-Bots
 A repo for python twitter bots - let's automate things
-
-## motivationBot.py
-A bot to tweet the day of the week, a given quote and a gif.
-
-## dailyBot
-A bot to favourite all tweets, retweet half and follow some tweets/users based 
-on a given filter.
-
-## followBot.py
-A twitter bot which follows everyone who follows me who I don't currently follow.
-
-## favRetweetBot.py
-A twitter bot to favourite and retweet all tweets based on a given filter.
-
-## autoreplyBot.py
-A twitter bot to auto replys to mentions like an answer machine.
-
-## config.py
-Contains config to connect to the Twitter API, gets values from Environment 
-Variables.
 
 ## Getting Started
 First you will need to create a twitter developer account to be able to access 
@@ -38,6 +18,29 @@ Now you should be able to run any of the above using for example:
 python3 followBot.py
 ```
 
+## What bots are included?
+
+### motivationBot.py
+A bot to tweet the day of the week, a given quote and a gif.
+
+### dailyBot.py
+A bot to favourite all tweets, retweet half and follow some tweets/users based 
+on a given filter.
+
+### followBot.py
+A twitter bot which follows everyone who follows me who I don't currently follow.
+
+### favRetweetBot.py
+A twitter bot to favourite and retweet all tweets based on a given filter.
+
+### autoreplyBot.py
+A twitter bot to auto replys to mentions like an answer machine.
+
+### config.py
+Contains config to connect to the Twitter API, gets values from Environment 
+Variables.
+
+
 ## Built with
 
 * [Tweepy](https://www.tweepy.org/) - An easy-to-use Python library for 
@@ -45,4 +48,5 @@ accessing the Twitter API.
 
 ## Acknowledgments
 
-Thanks to the #100DaysOfCode Twitter community for encouraging me to code for fun!!
+Thanks to the [#100DaysOfCode](https://twitter.com/search?q=%23100daysOfCode&src=hashtag_click)
+ Twitter community for encouraging me to code for fun!!
