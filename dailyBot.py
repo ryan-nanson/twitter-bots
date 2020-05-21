@@ -14,7 +14,7 @@ logger = logging.getLogger()
 class FavRetweetListener(tweepy.StreamListener):
     def __init__(self, api):
         self.start_time = time.time()
-        self.limit = 30
+        self.limit = 5 * 60
         self.api = api
         self.me = api.me()
 
@@ -22,7 +22,7 @@ class FavRetweetListener(tweepy.StreamListener):
         stream_time = time.time() - self.start_time
         if stream_time < self.limit:
             logger.info(f"Processing tweet id {tweet.id}")
-            time.sleep(randint(0, 2))
+            time.sleep(randint(0, 10))
             if tweet.in_reply_to_status_id is not None or \
                 tweet.user.id == self.me.id:
                 # This tweet is a reply or I'm its author so, ignore it
@@ -38,7 +38,7 @@ class FavRetweetListener(tweepy.StreamListener):
                 try:
                     should_retweet = randint(0, 10)
                     logger.info(should_retweet)
-                    if should_retweet < 5:
+                    if should_retweet < 4:
                         logger.info("Retwweting...")
                         tweet.retweet()
                 except Exception as e:
@@ -47,7 +47,7 @@ class FavRetweetListener(tweepy.StreamListener):
                 # Retweet, since we have not retweeted it yet
                 try:
                     logger.info(should_retweet)
-                    if should_retweet < 9:
+                    if should_retweet < 1:
                         logger.info("Following...")
                         self.api.create_friendship(tweet.user.id)
                 except Exception as e:
