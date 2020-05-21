@@ -20,20 +20,20 @@ python3 followBot.py
 
 ## What bots are included?
 
-### motivationBot.py
+### motivationBot
 A bot to tweet the day of the week, a given quote and a gif.
 
-### dailyBot.py
+### dailyBot
 A bot to favourite all tweets, retweet half and follow some tweets/users based 
 on a given filter.
 
-### followBot.py
+### followBot
 A twitter bot which follows everyone who follows me who I don't currently follow.
 
-### favRetweetBot.py
+### favRetweetBot
 A twitter bot to favourite and retweet all tweets based on a given filter.
 
-### autoreplyBot.py
+### autoreplyBot
 A twitter bot to auto replys to mentions like an answer machine.
 
 ### config.py
