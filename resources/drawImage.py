@@ -18,6 +18,8 @@ def drawImage(image_path):
     
     final_image= color_dodge(blured_image, grayscale_image)
     
+    plot.imshow(final_image, cmap='gray')
+    
     return(final_image)
 
 
@@ -34,7 +36,7 @@ def invert(grayscale_image):
 def blur(image):
     # apply gaussian filter
     # higher sigma means more blur
-    return scipy.ndimage.filters.gaussian_filter(image, sigma = 12)
+    return scipy.ndimage.filters.gaussian_filter(image, sigma = 15s)
 
 # method to color dodge (highlights the boldest edges)
 def color_dodge(front, back):
@@ -44,11 +46,9 @@ def color_dodge(front, back):
     return result.astype('uint8')
 
 def main():
-    image_path = "thankyou.gif"
-    final_image = drawImage(image_path)
-    
-    # plot the result
-    plot.imshow(final_image, cmap='gray')
+    image_path = "https://pbs.twimg.com/profile_images/1260852763963121664/wOfOpfsH_bigger.jpg"
+    hand_drawn_image = drawImage(image_path)
+    return hand_drawn_image
 
 if __name__ == "__main__":
     main()
