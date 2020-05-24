@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 def tweet_image(api):
-    logger.info("Tweeting hand drawn profile picture...")
     
     tweet_message = "Tweet message goes here!!"
     
@@ -23,20 +22,18 @@ def tweet_image(api):
     media_list = get_image(api)
         
     # send tweet with image
-    api.update_status(status=tweet_message, media_ids=media_list)
+    #api.update_status(status=tweet_message, media_ids=media_list)
     logger.info("Tweet sent successfully! :) ")
     
 def get_profile_picture_path(api):
     user = api.me()
-    logger.info(f"{user}")
     
-    # profile_image_url or profile_image_url_https?
+    # should we use profile_image_url or profile_image_url_https?
     image_path = user.profile_image_url_https
-    logger.info(f"{image_path}")
     
     # original image path is the above with "_normal" removed from the url
     original_image_path = image_path.replace('_normal', '')
-    logger.info(f"{original_image_path}")
+    logger.info(f"image url: {original_image_path}")
     
     return original_image_path
 
