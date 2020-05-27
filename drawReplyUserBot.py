@@ -24,6 +24,7 @@ def tweet_image(api, tweet):
     
     media_list = get_image(api)
         
+    logger.info(f"replying to status: {tweet.id}")
     # send reply with drawn image of user
     api.update_status(
                 status = tweet_message,
@@ -55,10 +56,14 @@ def check_replies(api, since_id):
     new_since_id = since_id
     for tweet in tweepy.Cursor(api.mentions_timeline,
         since_id=since_id).items():
+        logger.info(f"new mention found from {tweet.user.name}...")
         new_since_id = max(tweet.id, new_since_id)
-        if tweet.in_reply_to_status_id is not None:
-            continue
-
+        if ("draw me" in tweet.text.lower()):
+            logger.info(f"Follow {tweet.user.name}")
+            if not tweet.user.following:
+                tweet.user.follow()
+            
+            logger.info(f"sending drawing...")
             tweet_image(api, tweet)
     return new_since_id
 
