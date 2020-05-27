@@ -36,7 +36,7 @@ def invert(grayscale_image):
 def blur(image):
     # apply gaussian filter
     # higher sigma means more blur
-    return scipy.ndimage.filters.gaussian_filter(image, sigma = 15s)
+    return scipy.ndimage.filters.gaussian_filter(image, sigma = 15)
 
 # method to color dodge (highlights the boldest edges)
 def color_dodge(front, back):
