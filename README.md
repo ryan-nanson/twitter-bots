@@ -20,6 +20,9 @@ python3 followBot.py
 
 ## What bots are included?
 
+### drawBot
+A bot that will create and tweet a hand drawn image of your profile picture.
+
 ### motivationBot
 A bot to tweet the day of the week, a given quote and a gif.
 
