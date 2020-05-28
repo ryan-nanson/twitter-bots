@@ -14,7 +14,7 @@ logger = logging.getLogger()
 def tweet_image(api, tweet):
     
     logger.info(f"{tweet.user.name} has replied to your status, let's go!")
-    tweet_message = f"Hello {tweet.user.name}, I am a bot, here is a picture I have drawn of you: "
+    tweet_message = f"Hello {tweet.user.name}, I hope you enjoy your drawing"
     
     image_path = get_profile_picture_path(api, tweet.user)
     image = drawImage(image_path)
@@ -26,10 +26,10 @@ def tweet_image(api, tweet):
         
     logger.info(f"replying to status: {tweet.id}")
     # send reply with drawn image of user
-    api.update_status(
-                status = tweet_message,
-                in_reply_to_status_id = tweet.id,
-                media_ids=media_list)
+    api.update_status(status = tweet_message,
+                      in_reply_to_status_id = tweet.id, 
+                      auto_populate_reply_metadata=True,
+                      media_ids=media_list)
     logger.info("Tweet sent successfully! :) ")
     
 def get_profile_picture_path(api, user):
