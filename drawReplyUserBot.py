@@ -12,25 +12,27 @@ logger = logging.getLogger()
 
 
 def tweet_image(api, tweet):
-    
-    logger.info(f"{tweet.user.name} has replied to your status, let's go!")
-    tweet_message = f"Hello {tweet.user.name}, I hope you enjoy your drawing"
-    
-    image_path = get_profile_picture_path(api, tweet.user)
-    image = drawImage(image_path)
-    
-    # save image to temp file
-    plot.imsave('temp.png', image, cmap='gray', vmin=0, vmax=255)
-    
-    media_list = get_image(api)
+    try:
+        logger.info(f"{tweet.user.name} has replied to your status, let's go!")
+        tweet_message = f"Hello {tweet.user.name}, I hope you enjoy your drawing"
         
-    logger.info(f"replying to status: {tweet.id}")
-    # send reply with drawn image of user
-    api.update_status(status = tweet_message,
-                      in_reply_to_status_id = tweet.id, 
-                      auto_populate_reply_metadata=True,
-                      media_ids=media_list)
-    logger.info("Tweet sent successfully! :) ")
+        image_path = get_profile_picture_path(api, tweet.user)
+        image = drawImage(image_path)
+        
+        # save image to temp file
+        plot.imsave('temp.png', image, cmap='gray', vmin=0, vmax=255)
+        
+        media_list = get_image(api)
+            
+        logger.info(f"replying to status: {tweet.id}")
+        # send reply with drawn image of user
+        api.update_status(status = tweet_message,
+                          in_reply_to_status_id = tweet.id, 
+                          auto_populate_reply_metadata=True,
+                          media_ids=media_list)
+        logger.info("Tweet sent successfully! :) ")
+    except:
+        logger.info("failed to draw image")
     
 def get_profile_picture_path(api, user):
     
@@ -65,11 +67,18 @@ def check_replies(api, since_id):
             
             logger.info(f"sending drawing...")
             tweet_image(api, tweet)
+            
+            if not tweet.favorited:
+                # Mark it as Liked, since we have not done it yet
+                try:
+                    tweet.favorite()
+                except:
+                    pass
     return new_since_id
 
 def main():
     api = create_api()
-    since_id = 1
+    since_id = 1 
     while True:
         since_id = check_replies(api, since_id)
         logger.info("Waiting...")
@@ -78,6 +87,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-    
+        
     
