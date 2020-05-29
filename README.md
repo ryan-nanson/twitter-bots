@@ -20,15 +20,21 @@ python3 followBot.py
 
 ## What bots are included?
 
+### drawReplyUserBot.py
+A Twitter bot which draws and tweets any user's profile picture after they 
+have replied with a tweet containing the string "draw me" in it. Makes use of 
+`drawImage.py` in the `resources` directory
+
 ### drawBot
-A bot that will create and tweet a hand drawn image of your profile picture.
+A bot that will create and tweet a hand drawn image of your own profile picture.
 
 ### motivationBot
-A bot to tweet the day of the week, a given quote and a gif.
+A bot to tweet the day of the week using the `time` module, a given quote and 
+the gif `thankYou.gif` located in the `resources` directory.
 
 ### dailyBot
 A bot to favourite all tweets, retweet half and follow some tweets/users based 
-on a given filter.
+on a given filter ("#100DaysOfCode" by default).
 
 ### followBot
 A twitter bot which follows everyone who follows me who I don't currently follow.
@@ -53,3 +59,6 @@ accessing the Twitter API.
 
 Thanks to the [#100DaysOfCode](https://twitter.com/search?q=%23100daysOfCode&src=hashtag_click)
  Twitter community for encouraging me to code for fun!!
+ 
+This was my starting point and will help anyone get started with Python Twitter bots:
+https://realpython.com/twitter-bot-python-tweepy/
