@@ -61,19 +61,10 @@ def check_replies(api, since_id):
         logger.info(f"new mention found from {tweet.user.name}...")
         new_since_id = max(tweet.id, new_since_id)
         if ("draw me" in tweet.text.lower()):
-            logger.info(f"Follow {tweet.user.name}")
-            if not tweet.user.following:
-                tweet.user.follow()
             
             logger.info(f"sending drawing...")
             tweet_image(api, tweet)
-            
-            if not tweet.favorited:
-                # Mark it as Liked, since we have not done it yet
-                try:
-                    tweet.favorite()
-                except:
-                    pass
+
     return new_since_id
 
 def main():
